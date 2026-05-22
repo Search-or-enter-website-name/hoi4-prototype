@@ -48,11 +48,8 @@ export function applyMoveRaw(state, move, promotionPiece = null) {
     board[sq(3, rank)] = `${turn}R`;
     next.lastMove = { from: move.from, to: move.to, castle: 'q' };
   } else {
-    if (promotionPiece) {
-      board[move.to] = promotionPiece;
-    } else {
-      board[move.to] = piece;
-    }
+    const isPromotion = promotionPiece && typeOf(piece) === 'P';
+    board[move.to] = isPromotion ? promotionPiece : piece;
     next.lastMove = { from: move.from, to: move.to };
   }
 

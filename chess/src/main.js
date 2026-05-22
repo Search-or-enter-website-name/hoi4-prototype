@@ -1,5 +1,5 @@
 import { createInitialState } from './state.js';
-import { getLegalMoves } from './moves.js';
+import { getLegalMoves, needsPromotion } from './moves.js';
 import { applyMove, completePromotion } from './applyMove.js';
 import { colorOf, opponent } from './constants.js';
 import { renderBoard } from './ui/board.js';
@@ -109,7 +109,7 @@ function render(playFx = false) {
 
 function applyMoveWithEffect(move, isAI = false) {
   const prevHistory = state.history.length;
-  const promo = isAI && move ? `${state.turn}Q` : null;
+  const promo = isAI && move && needsPromotion(state, move) ? `${state.turn}Q` : null;
   const next = applyMove(state, move, promo);
 
   if (next.pendingPromotion && !isAI) {

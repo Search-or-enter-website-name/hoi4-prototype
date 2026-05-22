@@ -44,7 +44,8 @@ export function applyMove(state, move, promotionPiece = null) {
     };
   }
 
-  let next = applyMoveRaw(state, move, promotionPiece || null);
+  const promo = needsPromotion(state, move) ? promotionPiece : null;
+  let next = applyMoveRaw(state, move, promo);
   next.history = [...state.history, formatMove(move, promotionPiece)];
   next = finalizeStatus(next);
   return next;
