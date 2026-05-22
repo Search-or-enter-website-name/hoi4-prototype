@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chess</title>
+  <base href="./" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="toolbar">
+      <h1>Chess</h1>
+      <button type="button" id="new-game">New game</button>
+    </header>
+    <main class="game-main">
+      <div id="status" class="status-panel"></div>
+      <div id="board" class="board-container"></div>
+    </main>
+    <div id="promo-modal" class="modal hidden" role="dialog" aria-label="Promote pawn">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content promo-card">
+        <h2>Promote pawn</h2>
+        <p>Choose a piece:</p>
+        <div class="promo-buttons">
+          <button type="button" data-promo="Q" aria-label="Queen">♕ Queen</button>
+          <button type="button" data-promo="R" aria-label="Rook">♖ Rook</button>
+          <button type="button" data-promo="B" aria-label="Bishop">♗ Bishop</button>
+          <button type="button" data-promo="N" aria-label="Knight">♘ Knight</button>
+        </div>
+      </div>
+    </div>
+    <div id="overlay" class="overlay hidden">
+      <div class="overlay-card">
+        <h2 id="overlay-title"></h2>
+        <p id="overlay-msg"></p>
+        <button type="button" id="overlay-restart">New game</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    if (location.protocol === 'file:') {
+      document.getElementById('app').innerHTML =
+        '<div style="font-family:system-ui;max-width:32rem;margin:2rem auto;padding:1rem;line-height:1.5">' +
+        '<h1>Chess needs a local server</h1>' +
+        '<p>Opening this file directly does not work. From the repo root run:</p>' +
+        '<pre style="background:#222;color:#eee;padding:1rem;border-radius:6px">python3 -m http.server 8080</pre>' +
+        '<p>Then open <a href="http://localhost:8080/chess/">http://localhost:8080/chess/</a></p>' +
+        '</div>';
+    } else {
+      var s = document.createElement('script');
+      s.type = 'module';
+      s.src = './src/main.js';
+      document.body.appendChild(s);
+    }
+  </script>
+</body>
+</html>

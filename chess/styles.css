@@ -1,0 +1,295 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: #1a1a2e;
+  color: #eee;
+  min-height: 100vh;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 560px;
+  padding: 0.75rem 1rem;
+  background: #16213e;
+  border-bottom: 1px solid #2a3a5c;
+}
+
+.toolbar h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  flex: 1;
+}
+
+.toolbar button,
+.overlay-card button,
+.promo-buttons button {
+  padding: 0.4rem 0.9rem;
+  background: #3a506b;
+  color: #eee;
+  border: 1px solid #5a7a9a;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.toolbar button:hover,
+.overlay-card button:hover,
+.promo-buttons button:hover {
+  background: #4a6080;
+}
+
+.game-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  gap: 0.75rem;
+}
+
+.status-panel {
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
+
+.status-main {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.status-sub {
+  color: #e74c3c;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.status-last {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-top: 0.35rem;
+}
+
+.board-container {
+  width: 100%;
+  max-width: 480px;
+}
+
+.board-with-coords {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.rank-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0 0.15rem;
+  font-size: 0.7rem;
+  color: #888;
+  height: min(90vw, 480px);
+  max-height: 480px;
+}
+
+.rank-labels span {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.grid-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  width: min(90vw, 480px);
+  height: min(90vw, 480px);
+  max-width: 480px;
+  max-height: 480px;
+  border: 3px solid #2a2a40;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.file-labels {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  font-size: 0.7rem;
+  color: #888;
+  text-align: center;
+}
+
+.square {
+  position: relative;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+}
+
+.square.light {
+  background: #f0d9b5;
+}
+
+.square.dark {
+  background: #b58863;
+}
+
+.square.selected {
+  background-color: #7b9ec8 !important;
+  box-shadow: inset 0 0 0 3px #4a7ab8;
+}
+
+.square.legal {
+  cursor: pointer;
+}
+
+.square.last-move {
+  background-color: #cdd26a !important;
+}
+
+.square.in-check {
+  background-color: #e88 !important;
+  box-shadow: inset 0 0 0 3px #c44;
+}
+
+.piece {
+  font-size: clamp(1.5rem, 6vw, 2.75rem);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+.piece.w {
+  color: #fff;
+  text-shadow: 0 1px 2px #333, 0 0 1px #000;
+}
+
+.piece.b {
+  color: #222;
+}
+
+.move-hint {
+  position: absolute;
+  width: 28%;
+  height: 28%;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+.square.legal:has(.piece) .move-hint {
+  width: 85%;
+  height: 85%;
+  border-radius: 4px;
+  background: transparent;
+  box-shadow: inset 0 0 0 4px rgba(0, 0, 0, 0.35);
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  position: relative;
+  background: #16213e;
+  border: 1px solid #3a506b;
+  border-radius: 10px;
+  padding: 1.5rem;
+  z-index: 1;
+  text-align: center;
+}
+
+.promo-card h2 {
+  margin-bottom: 0.5rem;
+}
+
+.promo-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.promo-buttons button {
+  min-width: 5rem;
+  font-size: 1rem;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.overlay-card {
+  background: #16213e;
+  border: 1px solid #3a506b;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  max-width: 320px;
+}
+
+.overlay-card h2 {
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+}
+
+.overlay-card p {
+  margin-bottom: 1.25rem;
+  color: #ccc;
+}
+
+.overlay-card button {
+  font-size: 1rem;
+}

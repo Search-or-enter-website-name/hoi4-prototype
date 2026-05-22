@@ -4,6 +4,8 @@ Browser grand-strategy demo inspired by Hearts of Iron IV (1936 start), created 
 
 **Play online:** https://search-or-enter-website-name.github.io/hoi4-prototype/
 
+**Chess (separate game):** https://search-or-enter-website-name.github.io/hoi4-prototype/chess/ — run locally at [http://localhost:8080/chess/](http://localhost:8080/chess/) or [http://localhost:8080/chess.html](http://localhost:8080/chess.html) (see [chess/README.md](chess/README.md))
+
 ## Run locally
 
 ```bash
