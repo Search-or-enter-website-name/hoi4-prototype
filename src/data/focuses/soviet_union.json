@@ -1,0 +1,64 @@
+{
+  "nationId": "soviet_union",
+  "name": "Soviet National Focus",
+  "focuses": [
+    {
+      "id": "sov_five_year_plan",
+      "name": "Second Five Year Plan",
+      "desc": "Industrialization drive.",
+      "x": 0, "y": 0, "days": 70,
+      "requires": [],
+      "effects": [
+        { "type": "civ_factory", "value": 5 },
+        { "type": "mil_factory", "value": 3 }
+      ]
+    },
+    {
+      "id": "sov_collectivization",
+      "name": "Collectivization",
+      "desc": "Agricultural reform.",
+      "x": 1, "y": 0, "days": 63,
+      "requires": [],
+      "effects": [
+        { "type": "stability", "value": -8 },
+        { "type": "manpower", "value": 100 }
+      ]
+    },
+    {
+      "id": "sov_army_purge",
+      "name": "Officer Corps Purge",
+      "desc": "Political reliability.",
+      "x": 0, "y": 1, "days": 49,
+      "requires": ["sov_collectivization"],
+      "mutuallyExclusive": ["sov_restore_trotsky"],
+      "effects": [
+        { "type": "stability", "value": -5 },
+        { "type": "war_support", "value": 5 }
+      ]
+    },
+    {
+      "id": "sov_restore_trotsky",
+      "name": "Restore Trotsky",
+      "desc": "Permanent revolution.",
+      "x": 1, "y": 1, "days": 70,
+      "requires": ["sov_collectivization"],
+      "mutuallyExclusive": ["sov_army_purge"],
+      "effects": [
+        { "type": "war_support", "value": 20 },
+        { "type": "pp", "value": 120 }
+      ]
+    },
+    {
+      "id": "sov_claim_baltic",
+      "name": "Claim Baltic States",
+      "desc": "Soviet sphere.",
+      "x": 2, "y": 0, "days": 56,
+      "requires": ["sov_five_year_plan"],
+      "effects": [
+        { "type": "annex_province", "province": "estonia" },
+        { "type": "annex_province", "province": "latvia" },
+        { "type": "annex_province", "province": "lithuania" }
+      ]
+    }
+  ]
+}

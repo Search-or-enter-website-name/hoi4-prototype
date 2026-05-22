@@ -1,0 +1,74 @@
+{
+  "nationId": "france",
+  "name": "French National Focus",
+  "focuses": [
+    {
+      "id": "fra_little_entente",
+      "name": "Little Entente",
+      "desc": "Support eastern allies.",
+      "x": 0, "y": 0, "days": 56,
+      "requires": [],
+      "effects": [
+        { "type": "pp", "value": 80 },
+        { "type": "stability", "value": 5 }
+      ]
+    },
+    {
+      "id": "fra_maginot",
+      "name": "Extend Maginot Line",
+      "desc": "Fortify the border.",
+      "x": 1, "y": 0, "days": 70,
+      "requires": [],
+      "effects": [
+        { "type": "stability", "value": 8 },
+        { "type": "war_support", "value": 5 }
+      ]
+    },
+    {
+      "id": "fra_popular_front",
+      "name": "Popular Front",
+      "desc": "Left-wing coalition reforms.",
+      "x": 0, "y": 1, "days": 63,
+      "requires": ["fra_little_entente"],
+      "mutuallyExclusive": ["fra_strengthen_gov"],
+      "effects": [
+        { "type": "stability", "value": 10 },
+        { "type": "manpower", "value": 50 }
+      ]
+    },
+    {
+      "id": "fra_strengthen_gov",
+      "name": "Strengthen Government",
+      "desc": "Conservative stability.",
+      "x": 1, "y": 1, "days": 56,
+      "requires": ["fra_maginot"],
+      "mutuallyExclusive": ["fra_popular_front"],
+      "effects": [
+        { "type": "stability", "value": 12 },
+        { "type": "pp", "value": 60 }
+      ]
+    },
+    {
+      "id": "fra_rearmament",
+      "name": "National Rearmament",
+      "desc": "Expand arms industry.",
+      "x": 2, "y": 0, "days": 70,
+      "requires": ["fra_maginot"],
+      "effects": [
+        { "type": "mil_factory", "value": 4 },
+        { "type": "war_support", "value": 10 }
+      ]
+    },
+    {
+      "id": "fra_go_with_britain",
+      "name": "Go With Britain",
+      "desc": "Anglo-French coordination.",
+      "x": 2, "y": 1, "days": 49,
+      "requires": ["fra_rearmament", "fra_strengthen_gov"],
+      "effects": [
+        { "type": "pp", "value": 100 },
+        { "type": "war_support", "value": 8 }
+      ]
+    }
+  ]
+}

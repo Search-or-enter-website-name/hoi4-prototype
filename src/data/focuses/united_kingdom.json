@@ -1,0 +1,62 @@
+{
+  "nationId": "united_kingdom",
+  "name": "British National Focus",
+  "focuses": [
+    {
+      "id": "uk_strengthen_empire",
+      "name": "Strengthen the Empire",
+      "desc": "Imperial unity.",
+      "x": 0, "y": 0, "days": 56,
+      "requires": [],
+      "effects": [
+        { "type": "pp", "value": 90 },
+        { "type": "stability", "value": 5 }
+      ]
+    },
+    {
+      "id": "uk_rearmament",
+      "name": "British Rearmament",
+      "desc": "Rebuild armed forces.",
+      "x": 1, "y": 0, "days": 70,
+      "requires": [],
+      "effects": [
+        { "type": "mil_factory", "value": 3 },
+        { "type": "war_support", "value": 8 }
+      ]
+    },
+    {
+      "id": "uk_shadow_scheme",
+      "name": "Shadow Scheme",
+      "desc": "Hidden aircraft production.",
+      "x": 0, "y": 1, "days": 49,
+      "requires": ["uk_rearmament"],
+      "effects": [
+        { "type": "civ_factory", "value": 2 },
+        { "type": "mil_factory", "value": 2 }
+      ]
+    },
+    {
+      "id": "uk_containment",
+      "name": "Contain Germany",
+      "desc": "Deterrence diplomacy.",
+      "x": 2, "y": 0, "days": 56,
+      "requires": ["uk_strengthen_empire"],
+      "effects": [
+        { "type": "war_support", "value": 12 },
+        { "type": "pp", "value": 70 }
+      ]
+    },
+    {
+      "id": "uk_war_economy",
+      "name": "War Economy",
+      "desc": "Total mobilization.",
+      "x": 2, "y": 1, "days": 63,
+      "requires": ["uk_containment", "uk_shadow_scheme"],
+      "effects": [
+        { "type": "mil_factory", "value": 5 },
+        { "type": "at_war", "value": true },
+        { "type": "war_support", "value": 15 }
+      ]
+    }
+  ]
+}

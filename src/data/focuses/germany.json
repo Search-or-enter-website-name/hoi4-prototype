@@ -1,0 +1,100 @@
+{
+  "nationId": "germany",
+  "name": "German National Focus",
+  "focuses": [
+    {
+      "id": "ger_rhineland",
+      "name": "Remilitarize the Rhineland",
+      "desc": "Send troops into the demilitarized zone.",
+      "x": 0, "y": 0, "days": 70,
+      "requires": [],
+      "effects": [
+        { "type": "stability", "value": -5 },
+        { "type": "war_support", "value": 8 },
+        { "type": "pp", "value": 50 }
+      ]
+    },
+    {
+      "id": "ger_four_year_plan",
+      "name": "Four Year Plan",
+      "desc": "Expand industry for autarky.",
+      "x": 1, "y": 0, "days": 56,
+      "requires": [],
+      "effects": [
+        { "type": "civ_factory", "value": 3 },
+        { "type": "mil_factory", "value": 2 }
+      ]
+    },
+    {
+      "id": "ger_anschluss",
+      "name": "Anschluss",
+      "desc": "Union with Austria.",
+      "x": 2, "y": 0, "days": 70,
+      "requires": ["ger_rhineland"],
+      "requiresTargetOwned": { "province": "austria", "by": "austria" },
+      "effects": [
+        { "type": "annex_province", "province": "austria" },
+        { "type": "stability", "value": 5 },
+        { "type": "manpower", "value": 80 }
+      ]
+    },
+    {
+      "id": "ger_air_innovations",
+      "name": "Luftwaffe Innovations",
+      "desc": "Expand air arm.",
+      "x": 0, "y": 1, "days": 49,
+      "requires": ["ger_rhineland"],
+      "effects": [
+        { "type": "mil_factory", "value": 2 },
+        { "type": "war_support", "value": 5 }
+      ]
+    },
+    {
+      "id": "ger_sudeten",
+      "name": "Demand Sudetenland",
+      "desc": "Pressure Czechoslovakia.",
+      "x": 2, "y": 1, "days": 70,
+      "requires": ["ger_anschluss"],
+      "effects": [
+        { "type": "annex_province", "province": "sudeten" },
+        { "type": "pp", "value": 75 }
+      ]
+    },
+    {
+      "id": "ger_danzig",
+      "name": "Danzig or War",
+      "desc": "Ultimatum to Poland.",
+      "x": 3, "y": 1, "days": 56,
+      "requires": ["ger_sudeten"],
+      "mutuallyExclusive": ["ger_align_italy"],
+      "effects": [
+        { "type": "declare_war", "target": "poland" },
+        { "type": "war_support", "value": 15 },
+        { "type": "at_war", "value": true }
+      ]
+    },
+    {
+      "id": "ger_align_italy",
+      "name": "Align Italy",
+      "desc": "Diplomatic rapprochement with Rome.",
+      "x": 1, "y": 2, "days": 42,
+      "requires": ["ger_four_year_plan"],
+      "mutuallyExclusive": ["ger_danzig"],
+      "effects": [
+        { "type": "pp", "value": 100 },
+        { "type": "stability", "value": 3 }
+      ]
+    },
+    {
+      "id": "ger_weserubung",
+      "name": "Weserübung",
+      "desc": "Secure Scandinavian flank.",
+      "x": 0, "y": 2, "days": 70,
+      "requires": ["ger_danzig"],
+      "effects": [
+        { "type": "annex_province", "province": "denmark" },
+        { "type": "annex_province", "province": "norway" }
+      ]
+    }
+  ]
+}

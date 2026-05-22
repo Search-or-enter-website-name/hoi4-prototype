@@ -1,0 +1,50 @@
+{
+  "nationId": "poland",
+  "name": "Polish National Focus",
+  "focuses": [
+    {
+      "id": "pol_army_modernization",
+      "name": "Army Modernization",
+      "desc": "Update equipment.",
+      "x": 0, "y": 0, "days": 56,
+      "requires": [],
+      "effects": [
+        { "type": "mil_factory", "value": 2 },
+        { "type": "manpower", "value": 40 }
+      ]
+    },
+    {
+      "id": "pol_danzig",
+      "name": "Secure Danzig",
+      "desc": "Assert corridor rights.",
+      "x": 1, "y": 0, "days": 49,
+      "requires": [],
+      "effects": [
+        { "type": "stability", "value": 8 },
+        { "type": "war_support", "value": 10 }
+      ]
+    },
+    {
+      "id": "pol_french_alliance",
+      "name": "French Alliance",
+      "desc": "Western guarantee.",
+      "x": 0, "y": 1, "days": 56,
+      "requires": ["pol_danzig"],
+      "effects": [
+        { "type": "pp", "value": 70 },
+        { "type": "stability", "value": 5 }
+      ]
+    },
+    {
+      "id": "pol_prepare_war",
+      "name": "Prepare for War",
+      "desc": "Mobilize the nation.",
+      "x": 2, "y": 0, "days": 63,
+      "requires": ["pol_army_modernization"],
+      "effects": [
+        { "type": "war_support", "value": 15 },
+        { "type": "mil_factory", "value": 2 }
+      ]
+    }
+  ]
+}

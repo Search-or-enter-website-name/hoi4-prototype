@@ -1,0 +1,51 @@
+{
+  "nationId": "italy",
+  "name": "Italian National Focus",
+  "focuses": [
+    {
+      "id": "ita_ethiopia",
+      "name": "Conquer Ethiopia",
+      "desc": "East African empire.",
+      "x": 0, "y": 0, "days": 70,
+      "requires": [],
+      "effects": [
+        { "type": "war_support", "value": 12 },
+        { "type": "stability", "value": -3 },
+        { "type": "pp", "value": 60 }
+      ]
+    },
+    {
+      "id": "ita_industry",
+      "name": "Industrial Effort",
+      "desc": "Build factories.",
+      "x": 1, "y": 0, "days": 56,
+      "requires": [],
+      "effects": [
+        { "type": "civ_factory", "value": 2 },
+        { "type": "mil_factory", "value": 2 }
+      ]
+    },
+    {
+      "id": "ita_albania",
+      "name": "Albanian Occupation",
+      "desc": "Adriatic foothold.",
+      "x": 0, "y": 1, "days": 49,
+      "requires": ["ita_ethiopia"],
+      "effects": [
+        { "type": "annex_province", "province": "albania" },
+        { "type": "manpower", "value": 30 }
+      ]
+    },
+    {
+      "id": "ita_pact_steel",
+      "name": "Pact of Steel",
+      "desc": "Alliance with Germany.",
+      "x": 2, "y": 0, "days": 42,
+      "requires": ["ita_industry"],
+      "effects": [
+        { "type": "pp", "value": 80 },
+        { "type": "war_support", "value": 10 }
+      ]
+    }
+  ]
+}
