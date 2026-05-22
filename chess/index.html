@@ -30,6 +30,29 @@
         </div>
       </div>
     </div>
+    <div id="fx-layer" aria-hidden="true"></div>
+    <div id="start-screen" class="overlay" role="dialog" aria-label="Game setup">
+      <div class="overlay-card start-card">
+        <h2>Chess</h2>
+        <p class="start-sub">Choose how you want to play</p>
+        <fieldset class="start-field">
+          <legend>Your color</legend>
+          <label class="start-option"><input type="radio" name="color" value="w" checked /> White (move first)</label>
+          <label class="start-option"><input type="radio" name="color" value="b" /> Black</label>
+        </fieldset>
+        <fieldset class="start-field">
+          <legend>Mode</legend>
+          <label class="start-option"><input type="radio" name="mode" value="ai" checked /> vs Computer</label>
+          <label class="start-option"><input type="radio" name="mode" value="hotseat" /> Two players (same device)</label>
+        </fieldset>
+        <fieldset class="start-field" id="difficulty-field">
+          <legend>Difficulty</legend>
+          <label class="start-option"><input type="radio" name="difficulty" value="easy" checked /> Easy — random, sometimes sloppy</label>
+          <label class="start-option"><input type="radio" name="difficulty" value="hard" /> Hard — thinks several moves ahead</label>
+        </fieldset>
+        <button type="button" id="start-play" class="start-btn">Start game</button>
+      </div>
+    </div>
     <div id="overlay" class="overlay hidden">
       <div class="overlay-card">
         <h2 id="overlay-title"></h2>

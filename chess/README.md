@@ -24,19 +24,22 @@ HOI4 remains at **http://localhost:8080/**
 
 ### Play online (GitHub Pages)
 
-After this folder is pushed to GitHub:
-
 **https://search-or-enter-website-name.github.io/hoi4-prototype/chess/**
 
-If that URL 404s, the chess files are not on the published branch yet — push `chess/` to `main` and wait for Pages to rebuild.
+Shortcut: **https://search-or-enter-website-name.github.io/hoi4-prototype/chess.html**
 
 ## How to play
 
-1. **White** moves first.
+1. On the start screen, pick **your color** (White or Black), **vs Computer** or **two players**, and **Easy** or **Hard** AI.
 2. Click a piece to select it — legal squares are highlighted.
 3. Click a highlighted square to move (or click the same piece again to deselect).
-4. When a pawn reaches the last rank, choose Queen, Rook, Bishop, or Knight.
-5. **New game** resets the board.
+4. When a pawn reaches the last rank, choose Queen, Rook, Bishop, or Knight (computer always promotes to Queen).
+5. **New game** opens setup again.
+
+### AI difficulty
+
+- **Easy** — mostly random moves, prefers captures and checks sometimes.
+- **Hard** — searches several moves ahead with minimax.
 
 ## Rules included
 

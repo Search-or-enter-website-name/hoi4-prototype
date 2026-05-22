@@ -1,19 +1,33 @@
 import { inCheck } from '../rules.js';
 
-export function renderStatus(el, state) {
-  const { turn, status, history } = state;
+export function renderStatus(el, state, { thinking = false } = {}) {
+  const { turn, status, history, gameMode, playerColor, difficulty } = state;
   let main = '';
   let sub = '';
 
   if (status === 'playing') {
-    const who = turn === 'w' ? 'White' : 'Black';
-    main = `${who} to move`;
-    if (inCheck(state.board, turn)) {
-      sub = 'Check!';
+    if (thinking) {
+      main = 'Computer thinking…';
+    } else if (gameMode === 'ai') {
+      const yourTurn = turn === playerColor;
+      main = yourTurn ? 'Your turn' : 'Computer to move';
+      sub = `${difficulty === 'hard' ? 'Hard' : 'Easy'} AI · You are ${playerColor === 'w' ? 'White' : 'Black'}`;
+    } else {
+      const who = turn === 'w' ? 'White' : 'Black';
+      main = `${who} to move`;
+    }
+    if (!thinking && inCheck(state.board, turn)) {
+      sub = sub ? `${sub} · Check!` : 'Check!';
     }
   } else if (status === 'checkmate') {
-    const winner = turn === 'w' ? 'Black' : 'White';
-    main = `Checkmate — ${winner} wins`;
+    const winnerColor = turn === 'w' ? 'b' : 'w';
+    const winnerName = winnerColor === 'w' ? 'White' : 'Black';
+    if (gameMode === 'ai') {
+      const youWin = winnerColor === playerColor;
+      main = youWin ? 'Checkmate — you win!' : 'Checkmate — computer wins';
+    } else {
+      main = `Checkmate — ${winnerName} wins`;
+    }
   } else if (status === 'stalemate') {
     main = 'Stalemate — draw';
   } else if (status === 'draw') {
@@ -31,7 +45,15 @@ export function renderStatus(el, state) {
 
 export function overlayMessage(state) {
   if (state.status === 'checkmate') {
-    const winner = state.turn === 'w' ? 'Black' : 'White';
+    const winnerColor = state.turn === 'w' ? 'b' : 'w';
+    if (state.gameMode === 'ai') {
+      const youWin = winnerColor === state.playerColor;
+      return {
+        title: 'Checkmate',
+        msg: youWin ? 'You win!' : 'Computer wins.',
+      };
+    }
+    const winner = winnerColor === 'w' ? 'White' : 'Black';
     return { title: 'Checkmate', msg: `${winner} wins!` };
   }
   if (state.status === 'stalemate') {

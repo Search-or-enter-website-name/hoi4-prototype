@@ -42,6 +42,9 @@ export function renderBoard(container, state, onSquareClick) {
 
   const grid = document.createElement('div');
   grid.className = 'board-grid';
+  if (state.gameMode === 'ai' && state.playerColor === 'b') {
+    grid.classList.add('flipped');
+  }
 
   for (let rank = 7; rank >= 0; rank--) {
     for (let file = 0; file < 8; file++) {
