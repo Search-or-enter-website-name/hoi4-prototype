@@ -25,6 +25,9 @@ export function applyMoveRaw(state, move, promotionPiece = null) {
   const piece = board[move.from];
   let captured = move.captured || null;
 
+  // Never treat non-pawn moves as promotion (guards stale cached callers)
+  const promoPiece = promotionPiece && typeOf(piece) === 'P' ? promotionPiece : null;
+
   board[move.from] = null;
   next.enPassant = null;
 
@@ -48,8 +51,8 @@ export function applyMoveRaw(state, move, promotionPiece = null) {
     board[sq(3, rank)] = `${turn}R`;
     next.lastMove = { from: move.from, to: move.to, castle: 'q' };
   } else {
-    const isPromotion = promotionPiece && typeOf(piece) === 'P';
-    board[move.to] = isPromotion ? promotionPiece : piece;
+    const isPromotion = !!promoPiece;
+    board[move.to] = isPromotion ? promoPiece : piece;
     next.lastMove = { from: move.from, to: move.to };
   }
 

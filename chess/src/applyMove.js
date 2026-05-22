@@ -1,5 +1,5 @@
 import { fileOf, rankOf, typeOf } from './constants.js';
-import { applyMoveRaw } from './boardOps.js';
+import { applyMoveRaw } from './boardOps.js?v=5';
 import { getAllLegalMoves, isCheckmate, isStalemate, needsPromotion } from './moves.js';
 import { isInsufficientMaterial } from './rules.js';
 
@@ -27,7 +27,17 @@ function formatMove(move, promo) {
   return s;
 }
 
-export function applyMove(state, move, promotionPiece = null) {
+function resolvePromotion(state, move, promotionPiece, autoQueen) {
+  if (!needsPromotion(state, move)) return null;
+  if (promotionPiece) return promotionPiece;
+  if (autoQueen) return `${state.turn}Q`;
+  return null;
+}
+
+export function applyMove(state, move, options = {}) {
+  const promotionPiece = options.promotionPiece ?? null;
+  const autoQueen = options.autoQueen ?? false;
+
   if (state.status !== 'playing' || state.pendingPromotion) return state;
 
   const legal = getAllLegalMoves(state).some(
@@ -35,7 +45,9 @@ export function applyMove(state, move, promotionPiece = null) {
   );
   if (!legal) return state;
 
-  if (needsPromotion(state, move) && !promotionPiece) {
+  const promo = resolvePromotion(state, move, promotionPiece, autoQueen);
+
+  if (needsPromotion(state, move) && !promo) {
     return {
       ...state,
       pendingPromotion: { move: { ...move } },
@@ -44,9 +56,8 @@ export function applyMove(state, move, promotionPiece = null) {
     };
   }
 
-  const promo = needsPromotion(state, move) ? promotionPiece : null;
   let next = applyMoveRaw(state, move, promo);
-  next.history = [...state.history, formatMove(move, promotionPiece)];
+  next.history = [...state.history, formatMove(move, promo)];
   next = finalizeStatus(next);
   return next;
 }
@@ -58,6 +69,6 @@ export function completePromotion(state, pieceType) {
   return applyMove(
     { ...state, pendingPromotion: null },
     move,
-    piece
+    { promotionPiece: piece }
   );
 }

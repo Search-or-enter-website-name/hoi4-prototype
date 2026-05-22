@@ -1,11 +1,11 @@
 import { createInitialState } from './state.js';
-import { getLegalMoves, needsPromotion } from './moves.js';
-import { applyMove, completePromotion } from './applyMove.js';
+import { getLegalMoves } from './moves.js';
+import { applyMove, completePromotion } from './applyMove.js?v=5';
 import { colorOf, opponent } from './constants.js';
 import { renderBoard } from './ui/board.js';
 import { renderStatus, overlayMessage } from './ui/status.js';
 import { playEffect, scheduleEffectCleanup } from './ui/effects.js';
-import { pickAIMove } from './ai/engine.js';
+import { pickAIMove } from './ai/engine.js?v=5';
 
 let state = null;
 let effectCleanup = null;
@@ -109,8 +109,7 @@ function render(playFx = false) {
 
 function applyMoveWithEffect(move, isAI = false) {
   const prevHistory = state.history.length;
-  const promo = isAI && move && needsPromotion(state, move) ? `${state.turn}Q` : null;
-  const next = applyMove(state, move, promo);
+  const next = applyMove(state, move, { autoQueen: isAI });
 
   if (next.pendingPromotion && !isAI) {
     state = next;

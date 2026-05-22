@@ -1,14 +1,13 @@
 import { opponent } from '../constants.js';
-import { getAllLegalMoves, needsPromotion } from '../moves.js';
-import { applyMove } from '../applyMove.js';
+import { getAllLegalMoves } from '../moves.js';
+import { applyMove } from '../applyMove.js?v=5';
 import { inCheck } from '../rules.js';
 import { evaluateFor } from './evaluate.js';
 
 const MATE = 100000;
 
 function applyForSearch(state, move) {
-  const promo = needsPromotion(state, move) ? `${state.turn}Q` : null;
-  return applyMove(state, move, promo);
+  return applyMove(state, move, { autoQueen: true });
 }
 
 function terminalScore(state, aiColor) {
