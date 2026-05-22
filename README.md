@@ -1,6 +1,6 @@
 # HOI4 Prototype — January 1936
 
-Browser grand-strategy demo inspired by Hearts of Iron IV (1936 start).
+Browser grand-strategy demo inspired by Hearts of Iron IV (1936 start), created by Search-or-enter-website-name.
 
 ## Run
 
