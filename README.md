@@ -2,7 +2,9 @@
 
 Browser grand-strategy demo inspired by Hearts of Iron IV (1936 start), created by Search-or-enter-website-name.
 
-## Run
+**Play online:** https://search-or-enter-website-name.github.io/hoi4-prototype/
+
+## Run locally
 
 ```bash
 cd hoi4-prototype
